@@ -5,7 +5,7 @@ function App(props) {
         <section id="app">
             <h1 data-testid="title">{props.title}</h1>
             {props.addDescription === true ? <p data-testid="description">This is a description of my app</p> : null}
-            {props.articles ? props.articles.map(article => <NewsArticle key = {article.id} article = {article} />) : null}
+            {props.articles ? props.articles.map((article, id )=> <NewsArticle key = {id} article = {article} />) : null}
             {props.articles ? (
                 <p data-testid="reading-length">
                     Reading all article will take you {props.calculateReadingLength && props.calculateReadingLength(props.articles.reduce((accumulator, article) => accumulator + article.text , ''))} minutes
