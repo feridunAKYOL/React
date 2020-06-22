@@ -27,7 +27,7 @@ const ContactForm = () => {
                         <textarea
                             id="comment"
                             name="comment"
-                            onChange={(event) => { /* use event.target.value to set the comment */ }}
+                            onChange={(event) => { setComment({comment : event.target.value})/* use event.target.value to set the comment */ }}
                         />
                     </div>
                     <div className="field">
@@ -37,7 +37,7 @@ const ContactForm = () => {
                             type="text"
                             name="name"
                             aria-label="contact-name"
-                            onChange={(event) => { /* use event.target.value to set the name */ }}
+                            onChange={(event) => { setName({name : event.target.value})/* use event.target.value to set the name */ }}
                         />
                     </div>
                     <button type="submit">Send it!</button>
