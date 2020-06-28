@@ -22,6 +22,11 @@ const Pokedex = () => {
 
         /* Use the result of the fetchPokemons function */
         /* set the result using setPokemons, be sure to support the render below */
+        fetchPokemons().then(entries => {
+            //console.log(entries);
+            setPokemons(entries)
+            
+        });
     }, []);
 
     return (
@@ -34,10 +39,10 @@ const Pokedex = () => {
     )
 };
 
-const Pokemon = ({ /* add the property we want to use in order to display the name */ }) => {
+const Pokemon = ({ pokemon_species /* add the property we want to use in order to display the name */ }) => {
     return (
         <article>
-            {/* Render the property here */}
+            {pokemon_species.name/* Render the property here */}
         </article>
     )
 };
@@ -65,7 +70,9 @@ const InteractivePokedex = () => {
 
         /* Use the result of the fetchPokemons function */
         /* set the result using setPokemons, be sure to support the render below */
+        fetchPokemons().then(pokemon => setPokemons(pokemon));
     }, []);
+
 
     const onSelectHandler = (pokemon) => {
         const fetchPokemon = () => {
@@ -75,6 +82,9 @@ const InteractivePokedex = () => {
 
         /* Use the result of the fetchPokemon function */
         /* set the result using selectedPokemon, be sure to support the render below */
+        fetchPokemon().then(pokemon => 
+        
+            setSelectedPokemon(pokemon))
     };
 
     return (
@@ -83,7 +93,7 @@ const InteractivePokedex = () => {
             {
                 selectedPokemon === false
                 ? (
-                    pokemons.map(pokemon => <InterActivePokemon key={pokemon.entry_number} {...pokemon} /* pass the onSelectHandler here a property */ />)
+                    pokemons.map(pokemon => <InterActivePokemon key={pokemon.entry_number} {...pokemon} onSelectHandler={onSelectHandler}/* pass the onSelectHandler here a property */ />)
                 )
                 : (
                     <DetailedPokemon {...selectedPokemon} />
@@ -105,11 +115,12 @@ const DetailedPokemon = ({ flavor_text_entries }) => {
 const InterActivePokemon = ({ pokemon_species, onSelectHandler }) => {
     const onClick = () => {
         /* trigger the onSelectedHandler function with the pokemon_species */
+        onSelectHandler(pokemon_species)
     };
 
     return (
         <article>
-            {/* Render the property here */}
+            {pokemon_species.name/* Render the property here*/}
             <button onClick={onClick}>Learn more</button>
         </article>
     )
